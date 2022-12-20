@@ -39,7 +39,7 @@ router
         const loginCheck = await checkUser(emailToSubmit, password);
         if (loginCheck.authenticatedUser == true) {
             const tempUser = await getUserByEmail(emailToSubmit);
-            req.session.user = true
+            req.session.user = tempUser;
             req.session.email = tempUser.email;
             req.session.user_id = tempUser._id;
             const ownerTest = await getGarageByOwner(tempUser._id.toString());
@@ -112,7 +112,7 @@ router
     .route('/user_profile')
     .get(async (req, res) => {
         if (!req.session.user) {
-            res.status(401).render('/');
+            res.status(401).redirect('/');
         } else {
             res.render('userProfile', {'title': 'Profile', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'user_email': req.session.email, 'user': req.session.user});
         }

@@ -18,8 +18,8 @@
                 <a class="sidebar_link_btn" href="/garage/garage_list"> Garage List </a>
             </div>
             {{#if logged_in}}
-                <div class="row sidebar_link_row">
-                    <a class="sidebar_link_btn" href="/users/user_profile/"> User Profile </a>
+                <div class="row sidebar_link_row ">
+                    <a class="sidebar_link_btn active" href="/users/user_profile/"> User Profile </a>
                 </div>
             {{/if}}
             {{#if isOwner}}
@@ -34,7 +34,7 @@
         {{!-- begin page content --}}
         <div id="site_content" class="col-10">
             <div class="row">
-                <h2>Name: {{user.name}}</h2>
+                <h2>Name: <span id="user_prof_name">{{user.name}}</span></h2>
             </div>
             <div class="row">
                 <h4>Email: {{user.email}}</h4>
@@ -43,6 +43,8 @@
                 <h4>
                     Description: 
                 </h4><br>
+            </div>
+            <div class="row">
                 <div class="desc_box">
                     <span id="user_desc">{{user.description}}</span>
                 </div>
@@ -51,6 +53,8 @@
                 <h4>
                     Vehicles:
                 </h4><br>
+            </div>
+            <div class="row">
                 <div class="desc_box">
                     <span id="user_vehicles">{{user.vehicles_desc}}</span>
                 </div>

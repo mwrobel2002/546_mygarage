@@ -1,0 +1,72 @@
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        {{!-- begin sidebar --}}
+        <div id="site_sidebar" class="col-2">
+            <div id="sidebar_title_row" class="row">
+                <span id="sidebar_title"> Home </span>
+            </div>
+            {{!-- begin sidebar links --}}
+            <div class="row sidebar_link_row">
+                <a class="sidebar_link_btn" href="/"> Homepage </a>
+            </div>
+            {{#unless logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/login">  Login/Register </a>
+                </div>
+            {{/unless}}
+            <div class="row sidebar_link_row">
+                <a class="sidebar_link_btn" href="/garage/garage_list"> Garage List </a>
+            </div>
+            {{#if logged_in}}
+                <div class="row sidebar_link_row ">
+                    <a class="sidebar_link_btn active" href="/users/user_profile/"> User Profile </a>
+                </div>
+            {{/if}}
+            {{#if isOwner}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/garage/management">Garage Management</a>
+                </div>
+            {{/if}}
+            {{!-- end sidebar links --}}
+        </div>
+        {{!-- end sidebar --}}
+
+        {{!-- begin page content --}}
+        <div id="site_content" class="col-10">
+            <form id="profile-edit-form" method="POST">
+                <div class="row">
+                    <label for="nameInput">Email:</label>
+                    <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Name" value="{{user.name}}" required>
+                </div>
+                <div class="row">
+                    <label for="emailInput">Email:</label>
+                    <input class="form-control" type="text" id="emailInput" name="emailInput" placeholder="Email" value="{{user.email}}" required>
+                </div>
+                <div class="row">
+                    <label for="descriptionInput">
+                        Description: 
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="desc_box">
+                        <input class="form-control" type="text" id="descriptionInput" name="descriptionInput" placeholder="Description" value="{{user.description}}" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="vehicleInput">
+                        Vehicles: 
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="desc_box">
+                        <input class="form-control" type="text" id="vehicleInput" name="vehicleInput" placeholder="Vehicles" value="{{user.vehicles_desc}}" required>
+                    </div>
+                </div>
+
+                <button type="sumbit">Submit</button>
+            </form>
+        </div>
+        {{!-- end page content --}}
+    </div>
+</div>

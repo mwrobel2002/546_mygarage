@@ -79,6 +79,9 @@
             $('#appt_price').text("$"+ $('#'+$(this).val()).data('price'));
             $('#priceInput').val($('#'+$(this).val()).data('price'));
         });
+        $('#dateInput').attr('min', new Date().toLocaleDateString('en-ca'));
+        $('#timeInput').attr('min', '08:00:00');
+        $('#timeInput').attr('max', '17:00:00');
         $('#serviceInput').change();
     });
 </script>

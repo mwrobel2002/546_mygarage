@@ -23,6 +23,10 @@
     font-size: 24px;
     padding-top:0.3em;
 }
+.user_email_header:hover {
+    text-decoration: none;
+    color: antiquewhite
+}
 
 .header_row {
     width: 100%;
@@ -93,6 +97,17 @@ html,body,.container {
     border-color: gray;
     border-style: outset;
     border-width: 2px;
-    min-width:300px;
-    min-height:200px;
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 200px;
+    max-height: 200px;
+    background-color: whitesmoke;
+    padding: 5px;
+    text-overflow:ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+#user_prof_name {
+    text-transform: capitalize;
 }
