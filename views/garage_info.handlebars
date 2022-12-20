@@ -1,0 +1,113 @@
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        {{!-- begin sidebar --}}
+        <div id="site_sidebar" class="col-2">
+            <div id="sidebar_title_row" class="row">
+                <span id="sidebar_title"> Home </span>
+            </div>
+            {{!-- begin sidebar links --}}
+            <div class="row sidebar_link_row">
+                <a class="sidebar_link_btn" href="/"> Homepage </a>
+            </div>
+            {{#unless logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/login">  Login/Register </a>
+                </div>
+            {{/unless}}
+            <div class="row sidebar_link_row">
+                <a class="sidebar_link_btn" href="/garage/garage_list"> Garage List </a>
+            </div>
+            {{#if logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/users/user_profile/"> User Profile </a>
+                </div>
+            {{/if}}
+            {{#if isOwner}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/garage/management">Garage Management</a>
+                </div>
+            {{/if}}
+            {{!-- end sidebar links --}}
+        </div>
+        {{!-- end sidebar --}}
+
+        {{!-- begin page content --}}
+        <div id="site_content" class="col-10">
+            <div class="row">
+                <h2>{{garage.name}}</h2>
+            </div>
+            <div class="row">
+                <h4>
+                    Location: {{garage.location}}
+                </h4>
+             </div>
+            <div class="row">
+                <h4>
+                    Phone: {{garage.phoneNumber}}
+                </h4>
+            </div>
+            <div class="row">
+                <h4>
+                    Website: <a href="{{garage.website}}"> {{garage.website}} </a>
+                </h4>
+            </div>
+            {{#if cur_user}}
+                <div class="row">
+                    <h2>
+                        Your Appointments
+                    </h2>
+                </div>
+                {{#if appointments}}
+                    <div class="col-12 px-0">
+                        {{#each appointments}}
+                            <div class="row py-3 px-2 my-1 appt-box">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <span>
+                                            User: {{this.user_name}}
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        <span>
+                                            Appointment: {{this.date}} at {{this.time}} for the service: {{this.service}}.
+                                        </span>
+                                    </div>
+                                    <div class="row">
+                                        <span>
+                                            Estimated Total Price: ${{this.total_price}}
+                                        </span>
+                                    </div>
+                                </div>                        
+                            </div>
+                        {{/each}}
+                        
+                    </div>
+                {{else}}
+                    <div class='row'>
+                        <h4>You have no appointments.</h4>
+                    </div>
+                {{/if}}
+                <a href="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
+            {{/if}}
+             <div class="row">
+                <h2>
+                    Inventory
+                </h2>
+             </div>
+             {{#each inventory}}
+                <div class="row py-3 px-2 my-1 appt-box">
+                    {{#each this}}
+                    <div class="col-12">
+                        <div class="row">
+                            <span>
+                                {{@key}}: {{this}}
+                            </span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+        </div>
+        {{!-- end page content --}}
+    </div>
+</div>

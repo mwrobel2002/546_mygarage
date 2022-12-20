@@ -1,0 +1,84 @@
+
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        {{!-- begin sidebar --}}
+        <div id="site_sidebar" class="col-2">
+            <div id="sidebar_title_row" class="row">
+                <span id="sidebar_title"> Home </span>
+            </div>
+            {{!-- begin sidebar links --}}
+            <div class="row sidebar_link_row">
+                <a class="sidebar_link_btn" href="/"> Homepage </a>
+            </div>
+            {{#unless logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/login">  Login/Register </a>
+                </div>
+            {{/unless}}
+            <div class="row sidebar_link_row">
+                <a class="sidebar_link_btn" href="/garage/garage_list"> Garage List </a>
+            </div>
+            {{#if logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/users/user_profile/"> User Profile </a>
+                </div>
+            {{/if}}
+            {{#if isOwner}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/garage/management">Garage Management</a>
+                </div>
+            {{/if}}
+            {{!-- end sidebar links --}}
+        </div>
+        {{!-- end sidebar --}}
+
+        {{!-- begin page content --}}
+        <div id="site_content" class="col-10 no-float">
+            <h2>Create appointment here for {{garage.name}}.</h2>
+
+            <form id="create-appointment-form" method="POST" action="/garage/create_appointment/{{garage._id}}">
+                <label for="dateInput">Date</label>
+                <input type="date" id="dateInput" name="dateInput" required><br>
+
+                <label for="timeInput">Time</label>
+                <input type="time" id="timeInput" name="timeInput" required><br>
+
+                
+                <label for="serviceInput">Service</label>
+                <select name="serviceInput" id="serviceInput" required>
+                    {{#each services}}
+                        {{#if this}}
+                            <option id={{@key}} value={{@key}} data-price={{this}}>{{@key}}</option>
+                        {{/if}}
+                    {{/each}}
+                    {{!-- TODO: Make this load available services based on garage --}}
+                </select><br>
+                <div class="small_margin_bot">
+                    {{!-- TODO: Add total price from service value of garage --}}
+                    <span>
+                        Price: <span id="appt_price"></span>
+                        <input type="hidden" id="priceInput" name="priceInput">
+                    </span><br>
+                </div>
+                
+                <button type="submit">
+                    Submit
+                </button>
+            </form>
+
+        </div>
+        {{!-- end page content --}}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#serviceInput').change(function() {
+            console.log("changing price of thingy");
+            console.log($(this).val());
+            $('#appt_price').text("$"+ $('#'+$(this).val()).data('price'));
+            $('#priceInput').val($('#'+$(this).val()).data('price'));
+        });
+        $('#serviceInput').change();
+    });
+</script>

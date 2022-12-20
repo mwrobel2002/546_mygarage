@@ -1,0 +1,53 @@
+<form id="registration-form" method="POST" action="/register">
+    <h3>
+        Register
+    </h3>
+    <label for="nameInput">Name</label>
+    <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Name" required><br>
+
+    <label for="emailInput">Email</label>
+    <input class="form-control" type="text" id="emailInput" name="emailInput" placeholder="Email" required><br>
+
+    <label for="passwordInput">Password</label>
+    <input class="form-control" type="password" id="passwordInput" name="passwordInput" placeholder="Password" required><br>
+    <input type="submit" value="Login" class="btn btn-success">
+    
+</form>
+<p id="error"> {{error}}</p>
+
+<div>
+    <span>Already have an account? <a href="/login">Login here</a></span>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#registration-form").submit(function(event) {
+            event.preventDefault(); 
+            let name = $('#nameInput').val();
+            let emailInput = document.getElementById('emailInput');
+            let email = emailInput.value;
+            let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            
+            let password = $('#passwordInput').val();
+
+            if (emailRegex.test(email) && /^\S*$/.test(password) &&  /(?=.*[A-Z])(?=.*\d)(?=.*\W)/.test(password) && /([A-Za-z]+[ ][A-Za-z]+)/.test(name)) {
+                $("#error").text('');
+                $.ajax({
+                    type: 'POST',
+                    url: '/users/register',
+                    data: $('#registration-form').serialize(),
+                    dataType: "json",
+                }).always(function (data) {
+                    if(data.status == 200 ){
+                        window.location.href = '/login'
+                    }
+                    else {
+                        $('#registration-form')[0].reset();
+                    }
+                });
+            } else {
+                $("#error").text("Invalid Name, Email Address, or Pwd");
+            }
+        });
+    });
+</script>
