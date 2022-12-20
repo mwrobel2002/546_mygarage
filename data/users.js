@@ -15,7 +15,7 @@ const createUser = async (
 
     if (typeof(name) != 'string') throw "name not string";
     let nameRegex = /([A-Za-z]+[ ][A-Za-z]+)/;
-    if (!nameRegex.test(name.trim())) throw "name not in correct form"
+    if (!nameRegex.test(name.trim())) throw "name not in correct form firstname lastname"
 
     // email
 
@@ -110,48 +110,6 @@ const getUserByEmail = async(email) => {
     return user;
 }
 
-const getHistory = async(id) =>{
-    try{
-        const userCollection = await users();
-        const userExist = await userCollection.findOne({ id: id_ });
-        if (!userExist) return { msg: "Either the username or password is invalid" }
-        return userExist.history;
-    
-
-    }catch(e){
-        throw(`History Error:${e}`)
-    }
-}
-
-const favoriteOfUser = async(id,favoriteGarage) => {
-    try{
-    let favorites_ = await getFavorites(id);
-    favorites_ = favorites_.push(favoriteGarage);
-    await setFavorite(id,favorites_);
-    }catch(e){
-        console.log(`Favorite Error:${e}`);
-    }
-}
-const getFavorites = async(id_) =>{
-    const userCollection = await users();  
-    const userExist = await userCollection.findOne({ id: id_ });
-    if (!userExist) return { msg: "Either the username or password is invalid" }
-    return userExist.favorite
-}
-
-const setFavorite = async(_id,favorite_) =>{
-    try{
-    const userCollection = await users();  
-    const userExist = await userCollection.findOne({ id: id_ });
-    if (!userExist) return { msg: "Either the username or password is invalid" }
-    const myquery = { id: _id};
-    const newFavorite = { $set: {favorite: favorite_} };
-    await userCollection.updateOne(myquery,newFavorite)
-    }catch(e){
-        console.log(`Error favorit:${e}`);
-    }
-}
-
 const getUserById = async(id) => {
     if (!id) 
       throw 'You must provide an id to search for';
@@ -165,26 +123,16 @@ const getUserById = async(id) => {
     const userCollection = await users();
     const user = await userCollection.findOne({ _id: ObjectId(id) });
 
-    if (user === null)
+    if (!user)
       throw 'No user with that id';
 
     user._id = user._id.toString();
     return user;
 }
 
-const searchGarage = async (searchGarageName) => {
-    const garage = await axios.get();
-    let res = garage.data.filter(x => `${x.garageName}`.toUpperCase().includes(searchGarageName.toUpperCase())).slice(0,20);
-    res = {name:res.map(x => `${x.garageName}`),id: res.map(x =>x.id)}
-    return res;
-};
-
 module.exports = {
     createUser,
     checkUser,
-    favoriteOfUser,
-    getHistory,
-    searchGarage,
     getUserByEmail,
     getUserById
 };
