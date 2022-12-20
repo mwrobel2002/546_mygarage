@@ -105,7 +105,9 @@ router.route('/register').post(async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     req.session.destroy();
-    res.send('Logged out');
+    //res.send('Logged out');
+    console.log('redirecting to Homepage');
+    res.redirect('/'); 
 });
 
 router
@@ -116,8 +118,6 @@ router
         } else {
             res.render('userProfile', {'title': 'Profile', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'user_email': req.session.email, 'user': req.session.user});
         }
-        
-
     })
 
 
