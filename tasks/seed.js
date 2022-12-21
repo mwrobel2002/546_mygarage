@@ -2,6 +2,7 @@ const dbConnection = require('../config/mongoConnection');
 const data = require('../data/');
 const garages = data.garages;
 const users = data.users;
+const appointments = data.appointments;
 async function main() {
     console.log("started populating database");
     const db = await dbConnection.dbConnection();
@@ -28,7 +29,7 @@ async function main() {
     const dc = await users.createUser("Danny Cook", "danny1203.cook@gmail.com", "danny1203!Cook3e");
     const mk = await users.createUser("Marvin Kim", "marvin1123.kim@gmail.com", "marMRT@345wer");
 
-    const tb = await users.createUser("Troy Brooks", "troy921.brooks@gmail.com", "troy921T!roy");
+    const tb = await users.createUser("Troy Brooks", "troy921.brooks@gmail.com", "troy921T!roy");  
     const mg = await users.createUser("Mario Gray", "mario213.gray@gmail.com", "mario123Gray#Agml");
     const jp = await users.createUser("Jay Price", "rtas45.price@gmail.com", "rtas45RTY!Aj");
     const lh = await users.createUser("Leo Hughes", "leo414.hughes@gmail.com", "leo414Hugh#df");
@@ -60,9 +61,19 @@ async function main() {
 
     // const Tiger = await garages.creategarage("Tiger Garage", "Princeton, New Jersey", "609-924-0609", "https://tigergarage.mechanicnet.com", 4.6,{pickuppart: true, maintainance: true, delivercar: true});
     // const Kingston = await garages.creategarage("Kingston", "Kingston, New Jersey", "609-921-6134", "https://kingstongarage.com", 4.7,{pickuppart: true, maintainance: true, delivercar: true});
-
-
     
+    const appoitnment1 = await appointments.createAppointment(pm,Meineke,"2022-12-21","09:00","maintainance","44");
+    const appoitnment2 = await appointments.createAppointment(fc,Meineke,"2022-12-22","15:00","pickuppart","44");
+    const appoitnment3 = await appointments.createAppointment(dc,Firestone,"2022-12-23","10:00","maintainance","44");
+    const appoitnment4 = await appointments.createAppointment(tb,Firestone,"2022-12-24","12:00","pickuppart","45");
+    const appoitnment5 = await appointments.createAppointment(js,Firestone,"2022-12-25","09:00","maintainance","45");
+    
+    const appoitnment6 = await appointments.createAppointment(pm,Broadway,"2022-12-26","09:00","maintainance","48");
+    const appoitnment7 = await appointments.createAppointment(tb,Cunha,"2022-12-25","15:00","pickuppart","49");
+    const appoitnment8 = await appointments.createAppointment(dc,Cunha,"2022-12-23","10:00","maintainance","43");
+    const appoitnment9 = await appointments.createAppointment(tb,Ludlow,"2022-12-21","12:00","pickuppart","45");
+    const appoitnment10 = await appointments.createAppointment(js,Ludlow,"2022-12-28","09:00","maintainance","45");
+
     console.log('Done seeding database');
     await dbConnection.closeConnection();
 }
