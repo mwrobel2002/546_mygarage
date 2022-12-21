@@ -29,7 +29,7 @@
             
             let password = $('#passwordInput').val();
 
-            if (emailRegex.test(email) && /^\S*$/.test(password) &&  /(?=.*[A-Z])(?=.*\d)(?=.*\W)/.test(password) && /([A-Za-z]+[ ][A-Za-z]+)/.test(name)) {
+            if (emailRegex.test(email) && /^\S*$/.test(password) &&  /(?=.*[A-Z])(?=.*\d)(?=.*\W)/.test(password) && /([A-Za-z]+[ ][A-Za-z]+)/.test(name) && password.length >= 6) {
                 $("#error").text('');
                 $.ajax({
                     type: 'POST',
@@ -45,7 +45,7 @@
                     }
                 });
             } else {
-                $("#error").text("Invalid Name, Email Address, or Pwd");
+                $("#error").text("Name must be in the format <first name> <last name>.\nEmail must be in valid email address format.\nPassword must contain a capital letter, lowercase letter, number, and symbol, must not contain spaces, and must be at least 6 chars long.");
             }
         });
     });

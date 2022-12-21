@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 const data = require('../data');
 const { getGarageByOwner } = require('../data/garages');
-const { checkUser, createUser, getUserByEmail, getUserById } = require('../data/users');
+const { checkUser, createUser, getUserByEmail, getUserById, updateUser } = require('../data/users');
 const garageData = data.get;
 
 router
@@ -116,9 +116,36 @@ router
         } else {
             res.render('userProfile', {'title': 'Profile', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'user_email': req.session.email, 'user': req.session.user});
         }
-        
+    });
 
+router
+    .route('/user_profile/edit')
+    .get(async (req, res) => {
+        if (!req.session.user) {
+            res.status(401).redirect('/');
+        } else {
+            res.render('userProfileEdit', {'title': 'Profile', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'user_email': req.session.email, 'user': req.session.user});
+        }
     })
+    .post(async (req, res) => {
+        try {
+            console.log("body: " + req.body)
+            if (!req.session.user) {
+              res.status(401).redirect('/');
+            } else {
+                let updatedUser = await updateUser(req.session.user._id, req.body.nameInput, req.body.emailInput, req.body.descriptionInput, req.body.vehicleInput);                
+                if (updatedUser) {
+                    req.session.user = updatedUser;
+                    req.session.email = updatedUser.email;
+                    req.session.user_id = updatedUser._id;
+                    res.redirect('/users/user_profile');
+                }
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    });
 
 
 module.exports = router;

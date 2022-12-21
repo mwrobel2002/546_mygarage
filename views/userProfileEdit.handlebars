@@ -36,11 +36,11 @@
             <form id="profile-edit-form" method="POST">
                 <div class="row">
                     <label for="nameInput">Email:</label>
-                    <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Name" value="{{user.name}}" required>
+                    <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Name" required>
                 </div>
                 <div class="row">
                     <label for="emailInput">Email:</label>
-                    <input class="form-control" type="text" id="emailInput" name="emailInput" placeholder="Email" value="{{user.email}}" required>
+                    <input class="form-control" type="text" id="emailInput" name="emailInput" placeholder="Email" required>
                 </div>
                 <div class="row">
                     <label for="descriptionInput">
@@ -48,9 +48,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div class="desc_box">
-                        <input class="form-control" type="text" id="descriptionInput" name="descriptionInput" placeholder="Description" value="{{user.description}}" required>
-                    </div>
+                    <input class="form-control input_box" type="text" id="descriptionInput" name="descriptionInput" placeholder="Description" maxlength="140">
                 </div>
 
                 <div class="row">
@@ -59,14 +57,22 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div class="desc_box">
-                        <input class="form-control" type="text" id="vehicleInput" name="vehicleInput" placeholder="Vehicles" value="{{user.vehicles_desc}}" required>
-                    </div>
+                    <input class="form-control input_box" type="text" id="vehicleInput" name="vehicleInput" placeholder="Vehicles" maxlength="140">
                 </div>
-
-                <button type="sumbit">Submit</button>
+                <div class="row">
+                    <button type="sumbit">Submit</button>
+                </div>
             </form>
         </div>
         {{!-- end page content --}}
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#nameInput').val('{{user.name}}');
+        $('#emailInput').val('{{user.email}}');
+        $('#descriptionInput').val('{{user.description}}');
+        $('#vehicleInput').val('{{user.vehicles}}');
+    }); 
+</script>

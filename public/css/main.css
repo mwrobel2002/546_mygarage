@@ -108,6 +108,16 @@ html,body,.container {
     overflow: hidden;
 }
 
+.input_box {
+    border-color: gray;
+    border-style: outset;
+    border-width: 2px;
+    background-color: whitesmoke;
+    padding: 5px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
 #user_prof_name {
     text-transform: capitalize;
 }

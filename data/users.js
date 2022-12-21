@@ -4,6 +4,55 @@ const { ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const saltRounds = 16;
 
+const updateUser = async (id, name, email, desc, vehicle_desc) => {
+  
+  if (!id) throw "no id given";
+  if (typeof(id) != 'string') throw "id not string";
+  if (!ObjectId.isValid(id)) throw "Id is not a valid ObjectId";
+
+  console.log(id, name, email, desc, vehicle_desc);
+  let idPass = ObjectId(id);
+  
+  if (!name) throw "no name provided";
+  if (!email) throw "no email provided";
+
+  if (typeof(name) != 'string') throw "name not string";
+  let nameRegex = /([A-Za-z]+[ ][A-Za-z]+)/;
+  if (!nameRegex.test(name.trim())) throw "name not in correct form firstname lastname";
+
+  if (typeof(email) != 'string') throw "email not string";
+  let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  if (!emailRegex.test(email.trim())) throw "not valid email";
+  const emailToSubmit = email.trim().toLowerCase();
+  let desc_trimmed = '';
+  let vehicle_desc_trimmed = '';
+  if (desc) {
+    if (typeof(desc) != 'string') throw "desc not string";
+    if (desc.trim().length > 140) throw "desc too long";
+    desc_trimmed = desc.trim();
+  }
+  if (vehicle_desc) {
+    if (typeof(vehicle_desc) != 'string') throw "desc not string";
+    if (vehicle_desc.trim().length > 140) throw "vehicle desc too long";
+    vehicle_desc_trimmed = vehicle_desc.trim();
+  }
+
+
+  const user_col = await users();
+  let updatedInfo = await user_col.updateOne({_id: idPass}, {$set: {
+    name: name.trim().toLowerCase(),
+    email: emailToSubmit,
+    description: desc_trimmed.trim(),
+    vehicles: vehicle_desc_trimmed.trim()
+  }});
+
+  if (updatedInfo.modifiedCount === 0) {
+    throw 'could not update user successfully';
+  }
+
+  let user_return = await getUserById(id);
+  return user_return;
+}
 
 const createUser = async (
     name, email, password
@@ -126,7 +175,6 @@ const getUserById = async(id) => {
     if (!user)
       throw 'No user with that id';
 
-    user._id = user._id.toString();
     return user;
 }
 
@@ -134,5 +182,6 @@ module.exports = {
     createUser,
     checkUser,
     getUserByEmail,
-    getUserById
+    getUserById,
+    updateUser
 };
