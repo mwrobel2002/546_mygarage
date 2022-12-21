@@ -36,6 +36,35 @@ module.exports = {
     return garageList;
   },
 
+  async getAllLocations() {
+    
+
+    let garageList = await getAllgarages();
+
+    let locationList=[];
+
+    console.log("$$$$$$");
+
+    console.log(locationList);
+
+    for(let i = 0; i < garageList.length ;i++){  
+      locationList.push(garageList[i].location);
+    }
+
+    return locationList;
+  },
+
+  async getAllServices() {
+    
+    let garageList = await getAllgarages();
+    let serviceList = [];
+
+    for (let i = 0; i < garageList.length; i++) {
+      serviceList.push(garageList[i].serviceOptions);
+    }
+    return serviceList;
+  },
+
   async getGarageByOwner(owner_id) {
     const garageCollection = await garages();
 
