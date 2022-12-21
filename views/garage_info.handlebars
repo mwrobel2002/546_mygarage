@@ -109,6 +109,15 @@
                     {{/each}}
                 </div>
             {{/each}}
+            <div>
+            <form id="mark-as-fav" method="POST" action="/users/favorite/{{garage._id}}">
+                <h2>
+                    <button type="favorite">
+                        Mark as Favorite
+                    </button>
+                </h2>
+            </form>
+            </div>
         </div>
         {{!-- end page content --}}
     </div>

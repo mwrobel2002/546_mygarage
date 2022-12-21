@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const data = require('../data');
-const { getGarageByOwner } = require('../data/garages');
-const { checkUser, createUser, getUserByEmail, getUserById } = require('../data/users');
+const { getGarageByOwner, getgarage } = require('../data/garages');
+const { checkUser, createUser, getUserByEmail, getUserById, setfavbyid } = require('../data/users');
 const garageData = data.get;
+const { ObjectId } = require('mongodb');
+
 
 router
   .route('/login')
@@ -120,5 +122,32 @@ router
         }
     })
 
+router
+    .route('/favorite/:garage_id')
+    .post(async (req, res) => {
+        if (!req.session.user) {
+            res.status(401).redirect('/');          
+        } else {
+            let garage_id = req.params.garage_id;
+            let user_id = req.session.user_id
+            if (!garage_id) {
+                res.status(404).redirect('/');
+            } else {
+                if(!ObjectId.isValid(garage_id)){
+                  res.status(404).redirect('/');
+                } else {
+                  let garageTemp = await getgarage(garage_id);
+                  if(garageTemp){
+                    let favorite = await setfavbyid(garageTemp,user_id)
+                    console.log(favorite)
+                    if(favorite) {
+                      res.redirect("/users/user_profile")
+                      //console.log(req.session.favorite)
+                    }
+                  }
+                }
+              }
+            }
+          })
 
 module.exports = router;

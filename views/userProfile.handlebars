@@ -61,6 +61,32 @@
                     <span id="user_vehicles">{{user.vehicles_desc}}</span>
                 </div>
             </div>
+            <div class="row">
+                <h4>
+                    Favorite Garage:
+                </h4><br>
+            </div>
+            <div class="row py-3 px-2 my-1 appt-box">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <span>
+                                Name: <a href="/garage/info/{{user.favorite._id}}">{{user.favorite.name}}</a> 
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <span>
+                                Phone No: {{user.favorite.phoneNumber}}
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <span>
+                                Location: {{user.favorite.location}}
+                            </span>
+                        </div>                 
+                    </div>
+                </div>
+            </div>
         </div> 
         {{!-- end page content --}}
     </div>

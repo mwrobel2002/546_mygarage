@@ -76,6 +76,7 @@ html,body,.container {
 }
 
 .sidebar_link_row {
+    margin-top: 0.5em;
     justify-content: center;
 }
 
