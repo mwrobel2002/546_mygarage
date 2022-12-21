@@ -80,8 +80,10 @@
         $('#descriptionInput').val('{{user.description}}');
         $('#vehicleInput').val('{{user.vehicles}}');
 
-        $('#profile_edit_submit_btn').on('click', function () {
+        $('#profile_edit_submit_btn').on('click', function (e) {
             $('#error-text').text('');
+            e.preventDefault();
+            e.stopPropagation();
             try {
                 let name = $('#nameInput').val();
                 let email = $('#emailInput').val();

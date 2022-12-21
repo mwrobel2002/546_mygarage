@@ -33,7 +33,6 @@ const logger = function(req, res, next) {
       authenticatedCheck = 'Logged In';
   }
   console.log("[" + curDate + "] " + method + " " + route + " " + authenticatedCheck)
-  console.log(req);
   next();
 }
 

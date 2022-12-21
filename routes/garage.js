@@ -42,7 +42,8 @@ router
           appointmentsTemp = await getAllAppointmentsByUserAndGarage(req.session.user_id, garage_id);
         }
         let inventoryTemp = garageTemp.inventory;
-        res.render('garage_info', {'title': 'Garage Info', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'appointments': appointmentsTemp, 'garage': garageTemp, 'cur_user': req.session.user_id, 'user_email': req.session.email, 'inventory': inventoryTemp});
+        let servicesTemp = garageTemp.serviceOptions;
+        res.render('garage_info', {'title': 'Garage Info', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'appointments': appointmentsTemp, 'garage': garageTemp, 'cur_user': req.session.user_id, 'user_email': req.session.email, 'inventory': inventoryTemp, 'services': servicesTemp});
       }
     }
   });

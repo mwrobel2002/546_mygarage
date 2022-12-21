@@ -135,13 +135,43 @@ router
             if (!req.session.user) {
               res.status(401).redirect('/');
             } else {
-                let updatedUser = await updateUser(req.session.user._id, req.body.nameInput, req.body.emailInput, req.body.descriptionInput, req.body.vehicleInput);                
-                if (updatedUser) {
-                    req.session.user = updatedUser;
-                    req.session.email = updatedUser.email;
-                    req.session.user_id = updatedUser._id;
-                    res.redirect('/users/user_profile');
+                try {
+
+                    let name = req.body.nameInput;
+                    let email = req.body.emailInput;
+                    let description = req.body.descriptionInput;
+                    let vehicles =  req.body.vehicleInput;
+
+                    if (!name) throw "No name provided";
+                    if (typeof(name) != 'string') throw "name not string";
+                    let nameRegex = /([A-Za-z]+[ ][A-Za-z]+)/;
+                    if (!nameRegex.test(name.trim())) throw "name not in correct form firstname lastname"
+
+                    if (typeof(email) != 'string') throw "email not string";
+                    let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                    if (!emailRegex.test(email.trim())) throw "not valid email";
+                    const emailToSubmit = email.trim().toLowerCase();
+
+                    if (description) {
+                        if (typeof(description) != 'string') throw "desc not string"
+                        if (description.trim().length > 140) throw "desc too long" 
+                    }
+                    if (vehicles) {
+                        if (typeof(vehicles) != 'string') throw "vehicles desc not string"
+                        if (vehicles.trim().length > 140) throw "vehicles desc too long" 
+                    }
+                    let updatedUser = await updateUser(req.session.user._id, req.body.nameInput, req.body.emailInput, req.body.descriptionInput, req.body.vehicleInput);                
+                    if (updatedUser) {
+                        req.session.user = updatedUser;
+                        req.session.email = updatedUser.email;
+                        req.session.user_id = updatedUser._id;
+                        res.redirect('/users/user_profile');
+                    }
+                } catch (e) {
+                    console.log(e);
+                    res.status(404).redirect('/users/user_profile');
                 }
+                
             }
         }
         catch (e) {
