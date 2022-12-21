@@ -22,10 +22,8 @@ router
 
         if (typeof(email) != 'string') throw "email not string";
         let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        if (emailRegex.test(email.trim())) {
-
-        }
-        const emailToSubmit = email.toLowerCase();
+        if (!emailRegex.test(email.trim())) throw "not valid email";
+        const emailToSubmit = email.trim().toLowerCase();
 
         // password
 
