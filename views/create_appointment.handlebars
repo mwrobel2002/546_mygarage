@@ -39,14 +39,14 @@
             <h2>Create appointment here for {{garage.name}}.</h2>
 
             <form id="create-appointment-form" method="POST" action="/garage/create_appointment/{{garage._id}}">
-                <label for="dateInput">Date</label>
+                <label for="dateInput"><b>Date</b></label>
                 <input type="date" id="dateInput" name="dateInput" required><br>
 
-                <label for="timeInput">Time</label>
+                <label for="timeInput"><b>Time</b></label>
                 <input type="time" id="timeInput" name="timeInput" required><br>
 
                 
-                <label for="serviceInput">Service</label>
+                <label for="serviceInput"><b>Service</b></label>
                 <select name="serviceInput" id="serviceInput" required>
                     {{#each services}}
                         {{#if this}}
@@ -56,7 +56,7 @@
                 </select><br>
                 <div class="small_margin_bot">
                     <span>
-                        Price: <span id="appt_price"></span>
+                        <b>Price:</b> <span id="appt_price"></span>
                         <input type="hidden" id="priceInput" name="priceInput">
                     </span><br>
                 </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="row">
                     <button id="submit-create-appt-btn">
-                        Submit
+                        <b>Submit</b>
                     </button>
                 </div>
             </form>
