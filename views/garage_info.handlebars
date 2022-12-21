@@ -39,19 +39,19 @@
                 <h2>{{garage.name}}</h2>
             </div>
             <div class="row">
-                <h4>
+                <h3>
                     Location: {{garage.location}}
-                </h4>
+                </h3>
              </div>
             <div class="row">
-                <h4>
+                <h3>
                     Phone: {{garage.phoneNumber}}
-                </h4>
+                </h3>
             </div>
             <div class="row">
-                <h4>
+                <h3>
                     Website: <a href="{{garage.website}}"> {{garage.website}} </a>
-                </h4>
+                </h3>
             </div>
             {{#if cur_user}}
                 <div class="row">
@@ -86,10 +86,10 @@
                     </div>
                 {{else}}
                     <div class='row'>
-                        <h4>You have no appointments.</h4>
+                        <h3>You have no appointments.</h3>
                     </div>
                 {{/if}}
-                <a href="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
+                <a style=color:#092b4f ="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
             {{/if}}
              <div class="row">
                 <h2>

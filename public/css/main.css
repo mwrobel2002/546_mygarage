@@ -109,6 +109,10 @@ html,body,.container {
     overflow: hidden;
 }
 
+.register {
+    color: rgb(14, 4, 72)
+}
+
 #user_prof_name {
     text-transform: capitalize;
 }
