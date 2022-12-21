@@ -14,11 +14,16 @@ serviceType.sort();
 // Route for the page of all garages
 router.get('/garage_list', async (req, res) => {
     const garages = await garagedata.getAllgarages();
+    const locations = await garagedata.getAllLocations();
+    const services = await garagedata.getAllServices();
+
     res.render('garage_list', { 
         'authenticated': req.session.user ? true : false,
         'user': req.session.user,
         'title': 'All Garages',
         'garages': garages,
+        'locations': locations,
+        'services' : services,
         'user_email': req.session.email,
         'isOwner': req.session.isOwner,
         'logged_in': req.session.user
