@@ -35,6 +35,28 @@
         {{!-- end sidebar --}}
 
         {{!-- begin page content --}}
+        <form action="/garage_list" method="POST">
+            <label for="location">Select your city:</label>
+            <select id="location">
+                {{#each locations}}
+                    <option>{{this}}</option>
+                {{/each}}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+        
+        <form action="/garage_list" method="POST">
+            <label for="service">Select your service:</label>
+            <select id="service">
+                {{#each services}}
+                {{#if this}}
+                    <option value={{@key}}>{{@key}}</option>
+                {{/if}}
+                {{/each}}
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+
         <div id="site_content" class="col-10">
             <h2>All Garages</h2>
             {{#each garages}}
