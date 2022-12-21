@@ -67,7 +67,8 @@ router
       for (let i = 0; i < appointmentsTemp.length; i++){
         monthly_earnings += Number(appointmentsTemp[i].total_price);
       }
-      res.render('garage_management', {'title': 'Garage Management', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'appointments': appointmentsTemp, 'garage': garageTemp, 'user_email': req.session.email, 'inventory': inventoryTemp, 'monthly_earnings': monthly_earnings, 'num_appointments': num_appointments});
+      let servicesTemp = garageTemp.serviceOptions;
+      res.render('garage_management', {'title': 'Garage Management', 'isOwner': req.session.isOwner, 'logged_in': req.session.user, 'appointments': appointmentsTemp, 'garage': garageTemp, 'user_email': req.session.email, 'inventory': inventoryTemp, 'services': servicesTemp, 'monthly_earnings': monthly_earnings, 'num_appointments': num_appointments});
     }
   });
 

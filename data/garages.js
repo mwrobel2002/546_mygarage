@@ -124,7 +124,8 @@ module.exports = {
       website: website,
       inventory: inventory,
       serviceOptions: serviceOptions,
-      ownerid: ownerid
+      ownerid: ownerid,
+      monthly_earnings: 0
     };
 
     const insertInfo = await garageCollection.insertOne(newgarage);

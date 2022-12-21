@@ -88,11 +88,11 @@
                     <h4>You have no appointments.</h4>
                 </div>
             {{/if}}
-             <div class="row">
+            <div class="row">
                 <h2>
                     Inventory
                 </h2>
-             </div>
+            </div>
 
             {{#each inventory}}
                 <div class="row py-3 px-2 my-1 appt-box">
@@ -107,6 +107,25 @@
                     {{/each}}
                 </div>
             {{/each}}
+
+            <div class="row">
+                <h2>
+                    Services
+                </h2>
+            </div>
+
+            {{#each services}}
+                <div class="row py-3 px-2 my-1 appt-box">
+                    <div class="col-12">
+                        <div class="row">
+                            <span>
+                                {{@key}}: ${{this}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
         </div>
         {{!-- end page content --}}
     </div>
@@ -114,7 +133,7 @@
 
 <script type='text/javascript'>
     $(document).ready(function(){
-        $('#monthly_earnings').text('$'+ {{monthly_earnings}});
+        $('#monthly_earnings').text('$'+ {{garage.monthly_earnings}});
         $('#booked_appointments').text({{num_appointments}});
     });
 </script>

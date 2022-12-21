@@ -140,7 +140,17 @@ const createAppointment = async (
         throw 'Could not add new appointment';
   
       const newId = insertInfo.insertedId;
-  
+      
+      let monthly_earningsTemp = tempGarage.monthly_earnings;
+      monthly_earningsTemp += Number(total_price);
+      let updatedInfo = await garageCollection.updateOne({_id: tempGarage._id}, {$set: {
+        monthly_earnings: monthly_earningsTemp
+      }});
+    
+      if (updatedInfo.modifiedCount === 0) {
+        console.log("No details changed");
+      }
+
       const appointment = await newId.toString();
       return appointment;
 };
