@@ -89,7 +89,14 @@
                         <h3>You have no appointments.</h3>
                     </div>
                 {{/if}}
+<<<<<<< HEAD
                 <a style=color:#092b4f ="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
+=======
+                <div class="row">
+                    <a href="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
+                </div>
+                
+>>>>>>> dd0c13e8090bbe8de633b390b5a982380dac6f2d
             {{/if}}
              <div class="row">
                 <h2>
@@ -109,14 +116,12 @@
                     {{/each}}
                 </div>
             {{/each}}
-            <div>
-            <form id="mark-as-fav" method="POST" action="/users/favorite/{{garage._id}}">
-                <h2>
-                    <button type="favorite">
+            <div class="row">
+                <form id="mark-as-fav" method="POST" action="/users/favorite/{{garage._id}}">
+                    <button id="mark-as-favorite">
                         Mark as Favorite
                     </button>
-                </h2>
-            </form>
+                </form>
             </div>
         </div>
         {{!-- end page content --}}

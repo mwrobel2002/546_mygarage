@@ -66,6 +66,7 @@
                     Favorite Garage:
                 </h4><br>
             </div>
+<<<<<<< HEAD
             <div class="row py-3 px-2 my-1 appt-box">
                 <div class="col-12">
                     <div class="row">
@@ -84,9 +85,35 @@
                                 Location: <b>{{user.favorite.location}}</b>
                             </span>
                         </div>                 
+=======
+            {{#if user.favorite}}
+                <div class="row py-3 px-2 my-1 appt-box">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <span>
+                                    Name: <a href="/garage/info/{{user.favorite._id}}">{{user.favorite.name}}</a> 
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span>
+                                    Phone No: {{user.favorite.phoneNumber}}
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span>
+                                    Location: {{user.favorite.location}}
+                                </span>
+                            </div>                 
+                        </div>
+>>>>>>> dd0c13e8090bbe8de633b390b5a982380dac6f2d
                     </div>
                 </div>
-            </div>
+            {{else}}
+                <div class="row">
+                    None
+                </div>
+            {{/if}}
         </div> 
         {{!-- end page content --}}
     </div>
