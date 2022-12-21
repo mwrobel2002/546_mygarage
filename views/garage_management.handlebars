@@ -2,9 +2,6 @@
     <div class="row h-100">
         {{!-- begin sidebar --}}
         <div id="site_sidebar" class="col-2">
-            <div id="sidebar_title_row" class="row">
-                <span id="sidebar_title"> Home </span>
-            </div>
             {{!-- begin sidebar links --}}
             <div class="row sidebar_link_row">
                 <a class="sidebar_link_btn" href="/"> Homepage </a>
@@ -25,6 +22,11 @@
             {{#if isOwner}}
                 <div class="row sidebar_link_row">
                     <a class="sidebar_link_btn active" href="/garage/management">Garage Management</a>
+                </div>
+            {{/if}}
+            {{#if logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/users/logout"> Logout </a>
                 </div>
             {{/if}}
             {{!-- end sidebar links --}}

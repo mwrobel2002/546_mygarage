@@ -91,8 +91,8 @@ const createUser = async (
     }
 
     const hash = await bcrypt.hash(password, saltRounds);
-
-    const userPass = {name: name.trim().toLowerCase(), email: emailToSubmit, password: hash, description: '', vehicles: ''}
+    
+    const userPass = {name: name.trim().toLowerCase(), email: emailToSubmit, password: hash, description: '', vehicles: '', favorite: ''}
     const insertInfo = await user_col.insertOne(userPass);
     if (insertInfo.insertedCount === 0) throw 'Could not add user/pass combination';
     const newId = insertInfo.insertedId;
@@ -100,7 +100,7 @@ const createUser = async (
     return newId.toString();
   };
 
-  const checkUser = async (email, password) => {
+const checkUser = async (email, password) => {
     console.log("starting checkuser");
     if (!email) throw "No email provided";
     if (!password) throw "No password provided";
@@ -178,10 +178,29 @@ const getUserById = async(id) => {
     return user;
 }
 
+const setfavbyid = async(garage,id) => {
+  const userCollection =  await users();
+
+  if (!garage)
+    throw 'No garage';
+  else {
+    let updatedInfo = await userCollection.updateOne({_id: ObjectId(id)}, {$set: {
+      favorite: garage,
+    }});
+    if (updatedInfo.modifiedCount === 0) {
+      throw 'could not update Favorite successfully';
+    }
+  }
+  const user = getUserById(id)
+  
+  return user;
+}
+
 module.exports = {
     createUser,
     checkUser,
     getUserByEmail,
     getUserById,
-    updateUser
+    updateUser,
+    setfavbyid
 };

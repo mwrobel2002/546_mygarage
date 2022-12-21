@@ -2,9 +2,6 @@
     <div class="row h-100">
         {{!-- begin sidebar --}}
         <div id="site_sidebar" class="col-2">
-            <div id="sidebar_title_row" class="row">
-                <span id="sidebar_title"> Home </span>
-            </div>
             {{!-- begin sidebar links --}}
             <div class="row sidebar_link_row">
                 <a class="sidebar_link_btn" href="/"> Homepage </a>
@@ -25,6 +22,11 @@
             {{#if isOwner}}
                 <div class="row sidebar_link_row">
                     <a class="sidebar_link_btn" href="/garage/management">Garage Management</a>
+                </div>
+            {{/if}}
+            {{#if logged_in}}
+                <div class="row sidebar_link_row">
+                    <a class="sidebar_link_btn" href="/users/logout"> Logout </a>
                 </div>
             {{/if}}
             {{!-- end sidebar links --}}
@@ -87,7 +89,10 @@
                         <h4>You have no appointments.</h4>
                     </div>
                 {{/if}}
-                <a href="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
+                <div class="row">
+                    <a href="/garage/create_appointment/{{garage._id}}"> Create Appointment +</a>
+                </div>
+                
             {{/if}}
              <div class="row">
                 <h2>
@@ -107,6 +112,13 @@
                     {{/each}}
                 </div>
             {{/each}}
+            <div class="row">
+                <form id="mark-as-fav" method="POST" action="/users/favorite/{{garage._id}}">
+                    <button id="mark-as-favorite">
+                        Mark as Favorite
+                    </button>
+                </form>
+            </div>
         </div>
         {{!-- end page content --}}
     </div>

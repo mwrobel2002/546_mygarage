@@ -108,8 +108,7 @@ router
       catch (e) {
           console.log(e);
       }
-    });
-
+    });   
 router
   .route('/delete_appointment/:appointment_id')
   .post(async (req, res) => {

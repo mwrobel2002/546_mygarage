@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const data = require('../data');
-const { getGarageByOwner } = require('../data/garages');
-const { checkUser, createUser, getUserByEmail, getUserById, updateUser } = require('../data/users');
+const { getGarageByOwner, getgarage } = require('../data/garages');
+const { checkUser, createUser, getUserByEmail, getUserById, setfavbyid, updateUser } = require('../data/users');
 const garageData = data.get;
+const { ObjectId } = require('mongodb');
+
 
 router
   .route('/login')
@@ -105,7 +107,9 @@ router.route('/register').post(async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     req.session.destroy();
-    res.send('Logged out');
+    //res.send('Logged out');
+    console.log('redirecting to Homepage');
+    res.redirect('/'); 
 });
 
 router
@@ -147,5 +151,31 @@ router
         }
     });
 
+router
+    .route('/favorite/:garage_id')
+    .post(async (req, res) => {
+        if (!req.session.user) {
+            res.status(401).redirect('/');          
+        } else {
+            let garage_id = req.params.garage_id;
+            let user_id = req.session.user_id
+            if (!garage_id) {
+                res.status(404).redirect('/');
+            } else {
+                if(!ObjectId.isValid(garage_id)){
+                  res.status(404).redirect('/');
+                } else {
+                  let garageTemp = await getgarage(garage_id);
+                  if(garageTemp){
+                    let user = await setfavbyid(garageTemp,user_id)
+                    if(user) {
+                      req.session.user = user
+                      res.redirect("/users/user_profile")    
+                    }
+                  }
+                }
+              }
+            }
+          })
 
 module.exports = router;
