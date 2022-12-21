@@ -91,8 +91,8 @@ const createAppointment = async (
     if (typeof(garage_id) != 'string') throw "garage_id not string";
     if (typeof(date) != 'string') throw "date_time not string";
     if (typeof(time) != 'string') throw "date_time not string";
-    if (typeof(service) != 'string') throw "service not string"
-    if (typeof(total_price) != 'string') throw "total_price not string"
+    if (typeof(service) != 'string') throw "service not string";
+    if (typeof(total_price) != 'string') throw "total_price not string";
 
     if (!ObjectId.isValid(user_id)) throw "user id not valid objectid";
     if (!ObjectId.isValid(garage_id)) throw "garage id not valid objectid";

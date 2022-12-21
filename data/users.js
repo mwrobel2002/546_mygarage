@@ -47,7 +47,7 @@ const updateUser = async (id, name, email, desc, vehicle_desc) => {
   }});
 
   if (updatedInfo.modifiedCount === 0) {
-    throw 'could not update user successfully';
+    console.log("No details changed");
   }
 
   let user_return = await getUserById(id);
@@ -82,16 +82,16 @@ const createUser = async (
 
     passTest = /(?=.*[A-Z])(?=.*\d)(?=.*\W)/.test(password);
     if (!passTest) throw "Password must have uppercase letter, digit, and special character."
-  
+
     // CHECK NON DUPLICATE USERNAME
     const user_col = await users();
     const duplicateCheck = await user_col.find({email: emailToSubmit}).toArray();
     if (duplicateCheck.length > 0) {
       throw "Duplicate email in system."
     }
-  
+
     const hash = await bcrypt.hash(password, saltRounds);
-    
+
     const userPass = {name: name.trim().toLowerCase(), email: emailToSubmit, password: hash, description: '', vehicles: ''}
     const insertInfo = await user_col.insertOne(userPass);
     if (insertInfo.insertedCount === 0) throw 'Could not add user/pass combination';
@@ -100,11 +100,11 @@ const createUser = async (
     return newId.toString();
   };
 
-  const checkUser = async (email, password) => { 
+  const checkUser = async (email, password) => {
     console.log("starting checkuser");
     if (!email) throw "No email provided";
     if (!password) throw "No password provided";
-  
+
 
     // email
     if (typeof(email) != 'string') throw "email not string";
@@ -121,22 +121,22 @@ const createUser = async (
 
     passTest = /(?=.*[A-Z])(?=.*\d)(?=.*\W)/.test(password);
     if (!passTest) throw "Password must have uppercase letter, digit, and special character."
-  
+
      // CHECK NON DUPLICATE USERNAME
     const user_col = await users();
     const duplicateCheck = await user_col.find({email: emailToSubmit}).toArray();
     if (!(duplicateCheck.length == 1)) {
       throw "Username not in system."
     }
-    
+
     // compare passwords
-  
+
     try {
       compareToMatch = await bcrypt.compare(password, duplicateCheck[0].password);
     } catch (e) {
       //no op
     }
-  
+
     if (compareToMatch) {
       return {authenticatedUser: true}
     } else {

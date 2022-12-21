@@ -38,10 +38,11 @@
                     dataType: "json",
                 }).always(function (data) {
                     if(data.status == 200 ){
-                        window.location.href = '/login'
+                        window.location.href = '/login';
                     }
                     else {
                         $('#registration-form')[0].reset();
+                        $('#error').text("Registration failed");
                     }
                 });
             } else {
