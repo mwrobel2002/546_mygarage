@@ -132,7 +132,7 @@ const getUserById = async(id) => {
 
 const setfavbyid = async(garage,id) => {
   const userCollection =  await users();
-  console.log(garage)
+
   if (!garage)
     throw 'No garage';
   else {
@@ -143,7 +143,9 @@ const setfavbyid = async(garage,id) => {
       throw 'could not update Favorite successfully';
     }
   }
-  return garage;
+  const user = getUserById(id)
+  
+  return user;
 }
 
 module.exports = {

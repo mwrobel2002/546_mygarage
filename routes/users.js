@@ -138,11 +138,10 @@ router
                 } else {
                   let garageTemp = await getgarage(garage_id);
                   if(garageTemp){
-                    let favorite = await setfavbyid(garageTemp,user_id)
-                    console.log(favorite)
-                    if(favorite) {
-                      res.redirect("/users/user_profile")
-                      //console.log(req.session.favorite)
+                    let user = await setfavbyid(garageTemp,user_id)
+                    if(user) {
+                      req.session.user = user
+                      res.redirect("/users/user_profile")    
                     }
                   }
                 }
