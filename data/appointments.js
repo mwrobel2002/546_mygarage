@@ -120,10 +120,14 @@ const createAppointment = async (
     let price_regex = /^[0-9]+(,[0-9]{3})*(\.[0-9]{1,2})?$/;
     if(!price_regex.test(total_price)) throw "price invalid";
 
+    if (time < '06:00' || time > '17:00') {
+      throw "time out of range"
+    }
+  
     const appointmentCollection = await appointments();
 
-    temp_user = await getUserById(user_id);
-    user_name = temp_user.name;
+    let temp_user = await getUserById(user_id);
+    let user_name = temp_user.name;
 
     let new_appt = {
         user_id: user_id,
