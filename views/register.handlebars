@@ -1,21 +1,23 @@
-<form id="registration-form" method="POST" action="/register">
-    <h3>
-        Register
-    </h3>
-    <label for="nameInput">Name</label>
-    <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Name" required><br>
+<div class="col-md-4 col-md-offset-4">
+    <form id="registration-form" method="POST" action="/register">
+        <h2>
+            Register
+        </h2>
+        <label for="nameInput"><b>Name</b></label>
+        <input class="form-control" type="text" id="nameInput" name="nameInput" placeholder="Name" required><br>
 
-    <label for="emailInput">Email</label>
-    <input class="form-control" type="text" id="emailInput" name="emailInput" placeholder="Email" required><br>
+        <label for="emailInput"><b>Email</b></label>
+        <input class="form-control" type="text" id="emailInput" name="emailInput" placeholder="Email" required><br>
 
-    <label for="passwordInput">Password</label>
-    <input class="form-control" type="password" id="passwordInput" name="passwordInput" placeholder="Password" required><br>
-    <input type="submit" value="Register" class="btn btn-success">
-</form>
+        <label for="passwordInput"><b>Password</b></label>
+        <input class="form-control" type="password" id="passwordInput" name="passwordInput" placeholder="Password" required><br>
+        <input type="submit" value="Register" class="btn btn-success">
+   </form>
+</div>
 <p id="error"> {{error}}</p>
 
 <div>
-    <span>Already have an account? <a href="/login">Login here</a></span>
+    <span>Already have an account? <a style=color:#0055af href="/login">Login here</a></span>
 </div>
 
 <script>
