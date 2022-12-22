@@ -7,6 +7,9 @@ Then run 'npm run seed' to run the task of seeding the database.
 
 ## How the Application Works
 - Upon running 'npm start' website with load on 'http://localhost:3000/', the first page will be the landing page.
-- A non-authenticated user will be able to view the list of garages, and the individual page of a garage which contains appointment history and inventory.
-- Only a logged in, or authenicated, user will be able to mark as favorite, schedule an appoitnment, see the appointment expense. 
-- In addition, an authenticated user will be able to view their own profile which includes information about their account, favorite garage, description and vehicles they have.
+- A user can click on the site name in the header to return to the homepage at any time.
+- A user can otherwise use the sidebar on the left side of the page to navigate between most pages.
+- A non-authenticated user will be able to view the landing page, the list of garages, and the individual page of a garage which contains some information about the garage.
+- Only a logged in, authenticated user will be able to view or schedule their appointments with garages, mark a garage as their favorite, and view their user profile. 
+- In addition, an authenticated user will be able to edit a few fields about their account information including their name, email, description, and vehicle description.
+- If a user account is listed as owning a garage, they will also have access to the garage management page: A page which loads information about the garage's monthly earnings, number of appointments, information about all appointments scheduled with that garage, and a few other details.
