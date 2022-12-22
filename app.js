@@ -37,34 +37,6 @@ const logger = function(req, res, next) {
 }
 
 app.use(logger);
-// app.use(
-//   session({
-//     name: 'CS546FinalProject',
-//     secret: "This is a secret.. shhh don't tell anyone",
-//     saveUninitialized: false,
-//     resave: false,
-//     cookie: {maxAge: 60000}
-//   })
-// );
-
-// app.use('/private', (req, res, next) => {
-//   console.log(req.session.id);
-//   if (!req.session.user) {
-//     return res.redirect('/');
-//   } else {
-//     next();
-//   }
-// });
-
-// app.use('/login', (req, res, next) => {
-//   if (req.session.user) {
-//     return res.redirect('/homepage');
-//   } else {
-//     //here I',m just manually setting the req.method to post since it's usually coming from a form
-//     req.method = 'POST';
-//     next();
-//   }
-// });
 
 configRoutes(app);
 

@@ -112,30 +112,33 @@
                     {{/each}}
                 </div>
             {{/each}}
-
-            <div class="row">
-                <h2>
-                    Services
-                </h2>
-            </div>
-            {{#each services}}
-                <div class="row py-3 px-2 my-1 appt-box">
-                    <div class="col-12">
-                        <div class="row">
-                            <span>
-                                {{@key}}: {{#if this}}${{this}}{{else}}not offered{{/if}}
-                            </span>
+            {{#if services}}
+                <div class="row">
+                    <h2>
+                        Services
+                    </h2>
+                </div>
+                {{#each services}}
+                    <div class="row py-3 px-2 my-1 appt-box">
+                        <div class="col-12">
+                            <div class="row">
+                                <span>
+                                    {{@key}}: {{#if this}}${{this}}{{else}}not offered{{/if}}
+                                </span>
+                            </div>
                         </div>
                     </div>
+                {{/each}}
+            {{/if}}
+            {{#if cur_user}}
+                <div class="row">
+                    <form id="mark-as-fav" method="POST" action="/users/favorite/{{garage._id}}">
+                        <button id="mark-as-favorite">
+                            Mark as Favorite
+                        </button>
+                    </form>
                 </div>
-            {{/each}}
-            <div class="row">
-                <form id="mark-as-fav" method="POST" action="/users/favorite/{{garage._id}}">
-                    <button id="mark-as-favorite">
-                        Mark as Favorite
-                    </button>
-                </form>
-            </div>
+            {{/if}}
         </div>
         {{!-- end page content --}}
     </div>
